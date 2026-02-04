@@ -4,7 +4,7 @@
  *
  * Hardware:
  * - 10 buttons with common ground
- * - 1 rotary encoder with push button
+ * - 1 rotary encoder
  *
  * Created: 2016-2017
  * Updated for USB-MIDI: 2026
