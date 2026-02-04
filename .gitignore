@@ -1,0 +1,22 @@
+# Arduino build files
+*.elf
+*.hex
+*.bin
+*.eep
+*.o
+*.d
+
+# Arduino IDE generated files
+build/
+*.build/
+
+# macOS
+.DS_Store
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Claude Code local settings
+.claude/settings.local.json
