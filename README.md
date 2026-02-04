@@ -1,6 +1,8 @@
 # Kontrol Master MIDI
 
-USB MIDI controller using SparkFun Pro Micro. 10 buttons + rotary encoder send MIDI messages over USB, designed for use with BetterTouchTool (BTT) or any MIDI-compatible software.
+USB MIDI firmware for the **Kontrol Master** — a desktop controller originally created by [Touch Innovations](https://www.touchinnovations.com/) in 2016/2017. This project provides updated firmware using a SparkFun Pro Micro (ATmega32U4) to give the hardware a second life as a modern USB MIDI controller.
+
+10 buttons + rotary encoder send MIDI messages over USB, designed for use with BetterTouchTool (BTT) or any MIDI-compatible software.
 
 ## Hardware
 
