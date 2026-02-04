@@ -1,6 +1,8 @@
 # Kontrol Master MIDI
 
-USB MIDI controller using SparkFun Pro Micro. 10 buttons + rotary encoder send MIDI messages over USB, designed for use with BetterTouchTool (BTT) or any MIDI-compatible software.
+USB MIDI firmware for the **Kontrol Master** — a desktop controller originally created by [Touch Innovations](https://www.touchinnovations.com/) in 2016/2017. This project provides updated firmware using a SparkFun Pro Micro (ATmega32U4) to give the hardware a second life as a modern USB MIDI controller.
+
+10 buttons + rotary encoder send MIDI messages over USB, designed for use with BetterTouchTool (BTT) or any MIDI-compatible software.
 
 ## Hardware
 
@@ -75,9 +77,11 @@ Use this to confirm your wiring and troubleshoot if BTT isn't responding to inpu
 ### Configuring the Encoder for Volume Control
 
 1. Add a new MIDI trigger
-2. Turn the encoder **clockwise** one click — BTT captures: `Control Change, Channel 1, CC#1`
-3. Set the action to **Control Volume → Volume Up** (or use AppleScript for finer control)
-4. Repeat for counter-clockwise: `CC#2` → **Volume Down**
+2. Set the rotary knob to **Command 191 (Control Change)**
+3. Set **Control Number 1** → **Volume Down**
+4. Set **Control Number 2** → **Volume Up**
+
+The key is mapping CC#1 to Volume Down and CC#2 to Volume Up.
 
 **For smoother volume steps**, use this AppleScript action instead:
 
@@ -119,32 +123,45 @@ end tell
 - Action: **Controlling Other Applications → Launch Application / Open File / Start Apple Script**
 - This opens the app if closed, or brings it to front if running
 
-### Quick Reference: BTT Trigger Values
-
-| Physical Input | BTT Trigger Type | Channel | Value |
-|----------------|------------------|---------|-------|
-| Orange 1       | Note On          | 1       | 48    |
-| Orange 2       | Note On          | 1       | 49    |
-| White 1        | Note On          | 1       | 50    |
-| White 2        | Note On          | 1       | 51    |
-| White 3        | Note On          | 1       | 52    |
-| Yellow 1       | Note On          | 1       | 53    |
-| Yellow 2       | Note On          | 1       | 54    |
-| Red            | Note On          | 1       | 55    |
-| Blue           | Note On          | 1       | 56    |
-| Green          | Note On          | 1       | 57    |
-| Encoder CW     | Control Change   | 1       | CC#1  |
-| Encoder CCW    | Control Change   | 1       | CC#2  |
-
 ---
 
 ## Building & Uploading
 
-Requires Arduino IDE or arduino-cli with:
-- SparkFun AVR Boards package
-- MIDIUSB library
+### Step 1: Install Arduino IDE
 
-```bash
-arduino-cli compile --fqbn sparkfun:avr:promicro KontrolMaster_MIDI
-arduino-cli upload -p /dev/cu.usbmodem* --fqbn sparkfun:avr:promicro KontrolMaster_MIDI
-```
+Download and install from https://www.arduino.cc/en/software
+
+### Step 2: Add SparkFun Board Support
+
+1. Open Arduino IDE
+2. Go to **Arduino IDE → Settings** (or **Preferences** on older versions)
+3. In **Additional Boards Manager URLs**, add:
+   ```
+   https://raw.githubusercontent.com/sparkfun/Arduino_Boards/main/IDE_Board_Manager/package_sparkfun_index.json
+   ```
+4. Click **OK**
+
+### Step 3: Install SparkFun AVR Boards
+
+1. Go to **Tools → Board → Boards Manager**
+2. Search for **SparkFun AVR Boards**
+3. Click **Install**
+
+### Step 4: Install MIDIUSB Library
+
+1. Go to **Tools → Manage Libraries**
+2. Search for **MIDIUSB**
+3. Install the library by **Arduino**
+
+### Step 5: Select Board and Port
+
+1. Connect the SparkFun Pro Micro via USB
+2. Go to **Tools → Board → SparkFun AVR Boards → SparkFun Pro Micro**
+3. Go to **Tools → Processor → ATmega32U4 (5V, 16MHz)**
+4. Go to **Tools → Port** and select the port (usually shows as "usbmodem" on macOS)
+
+### Step 6: Upload
+
+1. Open `KontrolMaster_MIDI/KontrolMaster_MIDI.ino`
+2. Click the **Upload** button (→ arrow)
+3. Wait for "Done uploading" message
